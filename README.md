@@ -264,7 +264,7 @@ public class Error {
 jshell
 ```
 
-Результат:
+#### Решение:
 
 ![img_9.png](img_9.png)
 
@@ -281,7 +281,7 @@ jshell> Math.sqrt(16)
 jshell> Math.PI
 ```
 
-Результат:
+#### Решение:
 
 ![img_10.png](img_10.png)
 
@@ -297,7 +297,7 @@ jshell> String name = "Студент"
 jshell> System.out.println("Имя: " + name + ", Возраст: " + age)
 ```
 
-Результат:
+#### Решение:
 
 ![img_11.png](img_11.png)
 <br>
@@ -342,7 +342,7 @@ public class DataTypes {
 }
 ```
 
-Результат:
+#### Решение:
 
 ```
 package practice_1;
@@ -377,6 +377,8 @@ public class DataTypes {
 }
 ```
 
+Результат:
+
 ![img_15.png](img_15.png)
 
 <br>
@@ -394,11 +396,12 @@ jshell> int max = Integer.MAX_VALUE
 jshell> max + 1
 ```
 
-Результат:
+#### Решение:
 
 ![img_16.png](img_16.png)
 <br>
 ![img_17.png](img_17.png)
+<br>
 
 Вопрос: Почему 127 + 1 для byte даёт -128?
 
@@ -408,7 +411,6 @@ jshell> max + 1
 
 ### <a id="title7">Задание 3.3: Точность дробных чисел</a>
 
-
 Проверьте в jshell:
 
 ```
@@ -416,9 +418,11 @@ jshell> 0.1 + 0.2
 jshell> 0.1 + 0.2 == 0.3
 ```
 
-Результат:
+#### Решение:
 
 ![img_18.png](img_18.png)
+<br>
+
 
 Вопрос: Почему результат не равен 0.3? Как это учитывать при написании программ?
 
@@ -451,7 +455,7 @@ public class NumberSystems {
 }
 ```
 
-Результат:
+#### Решение:
 
 ![img_19.png](img_19.png)
 
@@ -485,7 +489,7 @@ public class Calculator {
 }
 ```
 
-Результат:
+#### Решение:
 
 ```
 package practice_1;
@@ -508,6 +512,8 @@ public class Calculator {
 }
 ```
 
+Результат:
+
 ![img_20.png](img_20.png)
 
 <br>
@@ -524,10 +530,12 @@ System.out.println(++x);  // Что выведет? ____
 System.out.println(x);    // Что выведет? ____
 ```
 
-Результат:
+#### Решение:
 
 * инкремент после выполнения операции.
 * декремент до выполнения операции
+
+Результат:
 
 ![img_21.png](img_21.png)
 
@@ -555,7 +563,7 @@ public class Comparison {
 }
 ```
 
-Результат:
+#### Решение:
 
 ```
 package practice_1;
@@ -576,6 +584,8 @@ public class Comparison {
     }
 }
 ```
+
+Результат:
 
 ![img_22.png](img_22.png)
 
@@ -599,9 +609,7 @@ jshell> a >> 1           // сдвиг вправо (деление на 2)
 
 Задание: Переведите числа в двоичную систему и объясните результаты.
 
-Результат:
-
-![img_23.png](img_23.png)
+#### Решение:
 
 ```
 AND
@@ -643,6 +651,10 @@ XOR
   0010  (2)
 ```
 
+Результат:
+
+![img_23.png](img_23.png)
+
 <br>
 <br>
 
@@ -671,9 +683,10 @@ public class StringComparison {
 }
 ```
 
-Результат:
+#### Решение:
 
 ![img_24.png](img_24.png)
+<br>
 
 Вопросы:
 
@@ -705,7 +718,7 @@ String c = new String("Java");
 
 ```
 
-Результат:
+#### Решение:
 
 Иными словами, в String Pool наодиться в кучи, в нём будет лежать 1 объект - на него ссылаются 2 переменные a и b. В куче лежит объект, на который ссылается переменная с. Всего 2 объекта в памяти.
 
@@ -740,7 +753,7 @@ public class BMICalculator {
 }
 ```
 
-Результат:
+#### Решение:
 
 ```
 package practice_1;
@@ -759,6 +772,8 @@ public class BMICalculator {
     }
 }
 ```
+
+Результат:
 
 ![img_25.png](img_25.png)
 
@@ -788,7 +803,7 @@ public class TemperatureConverter {
 }
 ```
 
-Результат:
+#### Решение:
 
 ```
 package practice_1;
@@ -807,6 +822,8 @@ public class TemperatureConverter {
     }
 }
 ```
+
+Результат:
 
 ![img_26.png](img_26.png)
 
@@ -834,7 +851,7 @@ public class SwapValues {
 }
 ```
 
-Результат:
+#### Решение:
 
 ```
 package practice_1;
@@ -862,6 +879,8 @@ public class SwapValues {
 }
 ```
 
+Результат:
+
 ![img_27.png](img_27.png)
 <br>
 ![img_28.png](img_28.png)
@@ -883,7 +902,7 @@ int n = 42;
 boolean isEven = ____; // используйте побитовое И
 ```
 
-Результат:
+#### Решение:
 
 ![img_30.png](img_30.png)
 
@@ -898,7 +917,7 @@ int n = -42;
 int abs = ____; // только арифметика и побитовые операции
 ```
 
-Результат:
+#### Решение:
 
 ![img_29.png](img_29.png)
 
