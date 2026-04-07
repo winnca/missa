@@ -65,59 +65,65 @@
 
 ### <a id="title21">Тест</a>
 
-![img_57.png](img_57.png)
-<br>
-![img_31.png](img_31.png)
-<br>
-![img_32.png](img_32.png)
-<br>
-![img_33.png](img_33.png)
-<br>
-![img_34.png](img_34.png)
-<br>
-![img_35.png](img_35.png)
-<br>
-![img_36.png](img_36.png)
-<br>
-![img_37.png](img_37.png)
-<br>
-![img_38.png](img_38.png)
-<br>
-![img_39.png](img_39.png)
-<br>
-![img_40.png](img_40.png)
-<br>
-![img_41.png](img_41.png)
-<br>
-![img_42.png](img_42.png)
-<br>
-![img_43.png](img_43.png)
-<br>
-![img_44.png](img_44.png)
-<br>
-![img_45.png](img_45.png)
-<br>
-![img_46.png](img_46.png)
-<br>
-![img_47.png](img_47.png)
-<br>
-![img_48.png](img_48.png)
-<br>
-![img_49.png](img_49.png)
-<br>
-![img_50.png](img_50.png)
-<br>
-![img_51.png](img_51.png)
-<br>
-![img_52.png](img_52.png)
-<br>
-![img_53.png](img_53.png)
-<br>
-![img_54.png](img_54.png)
-<br>
-![img_55.png](img_55.png)
-<br> 
-![img_56.png](img_56.png)
+<details>
+    <summary>result</summary>
+    <img src= "img_57.png">
+</details>
+
+<details open>
+    <summary>test</summary>
+    <img src= "https://github.com/winnca/missa/practice_1/img_31.png)">
+    <br>
+    <img src= "img_32.png)">
+    <br>
+    <img src= "img_33.png)">
+    <br>
+    <img src= "img_34.png)">
+    <br>
+    <img src= "img_35.png)">
+    <br>
+    <img src= "img_36.png)">
+    <br>
+    <img src= "img_37.png)">
+    <br>
+    <img src= "img_38.png)">
+    <br>
+    <img src= "img_39.png)">
+    <br>
+    <img src= "img_40.png)">
+    <br>
+    <img src= "img_41.png)">
+    <br>
+    <img src= "img_42.png)">
+    <br>
+    <img src= "img_43.png)">
+    <br>
+    <img src= "img_44.png)">
+    <br>
+    <img src= "img_45.png)">
+    <br>
+    <img src= "img_46.png)">
+    <br>
+    <img src= "img_47.png)">
+    <br>
+    <img src= "img_48.png)">
+    <br>
+    <img src= "img_49.png)">
+    <br>
+    <img src= "img_50.png)">
+    <br>
+    <img src= "img_51.png)">
+    <br>
+    <img src= "img_52.png)">
+    <br>
+    <img src= "img_53.png)">
+    <br>
+    <img src= "img_54.png)">
+    <br>
+    <img src= "img_55.png)">
+    <br>
+    <img src= "img_56.png)">
+</details>
 
 <br>
 <br>
