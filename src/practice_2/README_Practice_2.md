@@ -400,7 +400,7 @@ public class HRSystem {
 ```
 
 <details>
-    <summary>error</summary>
+    <summary>result</summary>
     <img src= "img_4.png">
 </details>
 
@@ -3064,8 +3064,3 @@ public class LibrarySystem {
     }
 }
 ```
-
-<details>
-    <summary>result</summary>
-    <img src= "img_1.png">
-</details>
