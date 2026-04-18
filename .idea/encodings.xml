@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/src/practice_1/BMICalculator.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_1/Calculator.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_1/Comparison.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_1/Error.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_1/HelloWorld.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_1/NumberSystems.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_1/README_Practice_1.md" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_1/SwapValues.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_2/README_Practice_2.md" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_2/task_1_1/BankAccount.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_2/task_1_2/company/app/HRSystem.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_2/task_3_1/MatrixOperations.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_2/task_3_2/GradeJournal.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_2/task_4_1/TextAnalyzer.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_2/task_5_1/GradeSystem.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_2/task_5_1/Student.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_2/task_6_1/ValidationFramework.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_2/task_7_1/RefactorStep1.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_2/task_7_1/RefactorStep2.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_2/task_7_2/OrderAnalytics.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_2/task_7_3/TextPipeline.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_3/task_1_1/NumberClassifer.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_3/task_1_2/GradeChecker.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_3/task_1_3/TaskOneAndThree.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_3/task_2_3/StringProcessor.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_3/task_2_4/LoopControl.java" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/src/practice_3/task_3_1/Result.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/practice_3/task_5_1/Animal.java" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
