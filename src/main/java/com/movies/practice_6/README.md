@@ -876,7 +876,7 @@ public class Movie {
 ```
 
 <details>
-    <summary>3.1</summary>
+    <summary>3.2</summary>
     <br>
     <img src="img_18.png"/>
 </details>
@@ -896,7 +896,7 @@ public class Movie {
 (3) что такое сессия (Session) в Hibernate?
 
 <details>
-    <summary>3.1</summary>
+    <summary>3.3</summary>
     <br>
     <img src="img_19.png"/>
     <br>
