@@ -17,6 +17,6 @@
         <property name="hibernate.format_sql">true</property>
 
         <!-- Mapping -->
-        <mapping class="com.movies.practice_6.task_3_1_2.Movie"/>
+        <mapping class="com.movies.task_3_1_2.Movie"/>
     </session-factory>
 </hibernate-configuration>

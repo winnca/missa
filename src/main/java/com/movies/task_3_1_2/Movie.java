@@ -1,4 +1,4 @@
-package com.movies.practice_6.task_3_1_2;
+package com.movies.task_3_1_2;
 
 import jakarta.persistence.*;
 

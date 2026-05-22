@@ -1,6 +1,6 @@
-package com.movies.practice_6.task_3_3;
+package com.movies.task_3_3;
 
-import com.movies.practice_6.task_3_1_2.Movie;
+import com.movies.task_3_1_2.Movie;
 import jakarta.persistence.criteria.*;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;

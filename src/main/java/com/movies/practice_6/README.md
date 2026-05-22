@@ -26,12 +26,6 @@
     <img src="img_10.png"/>
 </details>
 
-<details>
-    <summary>1.2</summary>
-    <br>
-    <img src="img_11.png"/>
-</details>
-
 <br>
 
 ### Задание 1.2
