@@ -1,4 +1,4 @@
-## Практические задания с: https://aliebraheem-fun.github.io/Modern-Programming-Technologies
+## Практические задания: https://aliebraheem-fun.github.io/Modern-Programming-Technologies
 
 * ### [Практическое занятие 1: Основы Java](https://github.com/winnca/missa/tree/practice_1)
 
