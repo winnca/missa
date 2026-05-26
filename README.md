@@ -1,11 +1,11 @@
 ## Практические задания с: https://aliebraheem-fun.github.io/Modern-Programming-Technologies
 
-* ### [Практическая 1](https://github.com/winnca/missa/tree/practice_1)
+* ### [Практическое занятие 1: Основы Java](https://github.com/winnca/missa/tree/practice_1)
 
-* ### [Практическая 2](https://github.com/winnca/missa/tree/practice_2)
+* ### [Практическое занятие 2: Основные конструкции языка Java](https://github.com/winnca/missa/tree/practice_2)
 
-* ### [Практическая 3](https://github.com/winnca/missa/tree/practice_3)
+* ### [Практическое занятие 3: Ветвление, Циклы и ООП](https://github.com/winnca/missa/tree/practice_3)
 
-* ### [Практическая 4](https://github.com/winnca/missa/tree/practice_4)
+* ### [Практическое занятие 4: Вложенные классы, Обобщения и Исключения](https://github.com/winnca/missa/tree/practice_4)
 
-* ### [Практическая 6](https://github.com/winnca/missa/tree/practice_6)
+* ### [Практическое занятие 6: Системы сборки, JDBC и Hibernate](https://github.com/winnca/missa/tree/practice_6)
