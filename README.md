@@ -6,4 +6,6 @@
 
 * ### [Практическая 3](https://github.com/winnca/missa/tree/practice_3)
 
+* ### [Практическая 4](https://github.com/winnca/missa/tree/practice_4)
+
 * ### [Практическая 6](https://github.com/winnca/missa/tree/practice_6)
