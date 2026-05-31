@@ -40,8 +40,6 @@
 
 * ### [Задание 6: Контрольные вопросы](#title14)
 
-* ### [Задание 6: Контрольные вопросы](https://github.com/winnca/missa/blob/practice_4/src/practice_4/task_6/task.md)
-
 <br>
 <br>
 
