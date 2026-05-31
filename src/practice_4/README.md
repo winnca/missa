@@ -38,6 +38,8 @@
 
 ### [Задание 5.2: Обобщённый Result тип](#title12)
 
+* ### [Задание 6: Контрольные вопросы](#title14)
+
 * ### [Задание 6: Контрольные вопросы](https://github.com/winnca/missa/blob/practice_4/src/practice_4/task_6/task.md)
 
 <br>
@@ -50,7 +52,7 @@
 <br>
 <br>
 
-<details>
+<details open>
     <summary>result</summary>
     <br>
     <img src="img_49.png"/>
@@ -167,7 +169,7 @@ public class Library {
 }
 ```
 
-<details>
+<details open>
     <summary>result</summary>
     <br>
     <img src="img.png"/>
@@ -181,7 +183,7 @@ public class Library {
 
 * При создании экземпляры книги обращаемся к конструктору через внешний класс.
 
-<details>
+<details open>
     <summary>result</summary>
     <br>
     <img src="img_1.png"/>
@@ -266,7 +268,7 @@ public class Computer {
 }
 ```
 
-<details>
+<details open>
     <summary>result</summary>
     <br>
     <img src="img_5.png"/>
@@ -311,7 +313,9 @@ public class Memory {
 }
 ```
 
-<details>
+Демонстрация без закомментированной строчки и с убиранием комментирования.
+
+<details open>
     <summary>result</summary>
     <br>
     <img src="img_7.png"/>
@@ -323,9 +327,12 @@ public class Memory {
 
 1. Почему закомментированная строка вызовет ошибку компиляции?
 
+* Нельзя обращаться к нестатическим переменным внешнего класса из вложенного статического класса (статический вложенный класс не имеет ссылки на экземпляр внешнего класса).
+
 * Нельзя обращаться к нестатическим переменным внешнего класса из вложенного статического класса. 
 
 * Статический вложенный класс не имеет ссылки на экземпляр внешнего класса.
+
 
 2. В чём разница при создании экземпляров этих двух классов?
 
@@ -411,7 +418,7 @@ public class EventSystem {
 }
 ```
 
-<details>
+<details open>
     <summary>result</summary>
     <br>
     <img src="img_8.png"/>
@@ -510,7 +517,7 @@ class Test{
 }
 ```
 
-<details>
+<details open>
     <summary>result</summary>
     <br>
     <img src="img_9.png"/>
@@ -614,7 +621,7 @@ class TestNumberUtils{
 }
 ```
 
-<details>
+<details open>
     <summary>result</summary>
     <br>
     <img src="img_10.png"/>
@@ -631,6 +638,8 @@ class TestNumberUtils{
 * sumNumbers(List<? extends Number> list) → double — сумма через Number::doubleValue.
 
 * addDefaults(List<? super String> list) — добавляет "default1" и "default2".
+
+Объясните в комментарии: почему List для Integer не присваивается переменной List для Number? Как это обойти с помощью wildcard? Продемонстрируйте корректную копию из List для Integer в List для Number.
 
 Объясните в комментарии: почему List<Integer> не присваивается переменной List<Number>? Как это обойти с помощью wildcard? Продемонстрируйте корректную копию из List<Integer> в List<Number>.
 
@@ -666,6 +675,12 @@ class Test{
 }
 ```
 
+* В Java массивы являются ковариантными (например, Integer[] можно присвоить в Number[] = прозрачная коробка яблок разрешит набить табличку фрукты, но положить апельсины нельзя = яблоки инты, апельсины вещественные).
+
+* Дженерики = инвариантны:
+  
+* List для Integer и List для Number — это два абсолютно разных, не связанных друг с другом типа, у которых общий предок только List<?> (закрытая сумка только для яблок с такой надписью, сразу говорит, что и для чего).
+
 * В Java массивы являются ковариантными (например, Integer[] можно присвоить в Number[]), но дженерики (Generics) — инвариантны.
   
 * Это значит, что List<Integer> и List<Number> — это два абсолютно разных, не связанных друг с другом типа, у которых общий предок только List<?>.
@@ -695,6 +710,8 @@ public static void processDogs(List<? extends Dog> source) {
 
 Чтение разрешено:
 
+* Метод может принять List для Dog или List для Corgi. Если передали List для Corgi, то каждый Корги — это Собака, поэтому вызвать метод bark() абсолютно безопасно.
+
 * Метод может принять List<Dog> или List<Corgi>. Если передали List<Corgi>, то каждый Корги — это Собака, поэтому вызвать метод bark() абсолютно безопасно.
 
 Запись запрещена:
@@ -714,11 +731,19 @@ public static void addDogToKennel(List<? super Dog> destination) {
 
 Запись разрешена:
 
-* Метод может принять List<Dog>, List<Animal> или List<Object>. 
+* Метод может принять List для Dog, List для Animal или List для Object.
+
+* Метод может принять List<Dog>, List<Animal> или List<Object>.
 
 * В любой из этих трех списков можно абсолютно легально положить объект типа Dog или его наследника Corgi (ведь Корги — это тоже Собака и тоже Животное).
 
 Чтение запрещено:
+
+* Если нам на вход передали List для Animal, то там внутри уже могут лежать кошки, птицы и крокодилы.
+
+* Попытка прочитать оттуда элемент и сразу привести его к типу Dog (строка Dog dog = destination.get(0)) приведет к катастрофе в runtime, если там окажется кошка.
+
+* Единственное, что гарантированно можно оттуда прочитать — это Object.
 
 * Если нам на вход передали List<Animal>, то там внутри уже могут лежать кошки, птицы и крокодилы.
 
@@ -726,7 +751,7 @@ public static void addDogToKennel(List<? super Dog> destination) {
 
 * Единственное, что гарантированно можно оттуда прочитать — это Object.
 
-<details>
+<details open>
     <summary>result</summary>
     <br>
     <img src="img_11.png"/>
@@ -791,7 +816,7 @@ public class ExceptionBasic {
 }
 ```
 
-<details>
+<details open>
     <summary>result</summary>
     <br>
     <img src="img_12.png"/>  
@@ -928,7 +953,7 @@ public class BankTest {
 }
 ```
 
-<details>
+<details open>
     <summary>result</summary>
     <br>
     <img src="img_13.png"/>  
@@ -1029,6 +1054,16 @@ public class FileLogger implements AutoCloseable {
 
 Что выводится при вызове close()?
 
+* При автоматическом закрытии логгера срабатывает @Override метод close().
+
+* Выводится строка о подтверждении закрытии файла и указания точного количества сделанных за сессию записей.
+
+Почему transient здесь не применяется, а flush() нужен?
+
+* Ключевое слово transient используется исключительно при сериализации объектов. Поле не нужно сохранять в байтовый поток при превращении объекта в файл.
+
+* FileLogger не сериализуется. Поля writer и filename нужны для текущей работы запущенной программы, а не для сохранения состояния самого объекта логгера.
+
 * При автоматическом закрытии логгера в блоке try-with-resources срабатывает переопределенный метод close().
 
 * В консоль выводится строка, подтверждающая закрытие файла и указывающая точное количество сделанных за сессию записей.
@@ -1041,7 +1076,7 @@ public class FileLogger implements AutoCloseable {
 
 * FileLogger не сериализуется. Поля writer и filename нужны для текущей работы запущенной программы, а не для сохранения состояния самого объекта логгера.
 
-<details>
+<details open>
     <summary>result</summary>
     <br>
     <img src="img_14.png"/>  
@@ -1060,6 +1095,24 @@ public class FileLogger implements AutoCloseable {
 * (2) для чего используется цепочка исключений?
 
 * (3) какова разница между getMessage() и getCause().getMessage()?
+
+1) Что выведет `e.getCause().getMessage()`?
+
+* Return сообщение корневого исключения, которое произошло на уровне базы данных.
+
+2) Для чего используется цепочка исключений?
+
+* **Инкапсуляция и абстракция**. Верхние слои приложения не должны знать о деталях реализации нижних слоев. Viewer слой получает ошибку бизнес-логики, а не ошибку базы данных.
+
+* **Сохранение контекста**. Можно добавить важные высокоуровневые детали (например, id, при котором упал запрос), не теряя при этом техническую причину сбоя.
+
+* **Упрощение отладки**. Можно увидеть в логах полный путь ошибки от места её зарождения до места перехвата.
+
+3) Разница между `getMessage()` и `getCause().getMessage()`?
+
+* getMessage(): return текстовое описание текущего исключения. Формируется на уровне сервиса и объясняет, какая бизнес-операция сорвалась.
+
+* getCause().getMessage(): return текстовое описание предыдущего исключения, которое стало триггером для текущего.
 
 ### Решение
 
@@ -1133,7 +1186,7 @@ public class Application {
 
 * getCause().getMessage(): return текстовое описание предыдущего (вложенного) исключения, которое стало триггером для текущего. В данном коде это сообщение из DatabaseLayer: "SQL Error: Invalid ID -1".
 
-<details>
+<details open>
     <summary>result</summary>
     <br>
     <img src="img_15.png"/>  
@@ -1184,6 +1237,12 @@ public class SimpleCache<K, V>{
             throw new RuntimeException("Не удалось получить доступ к полю accessOrder", e);
         }
     }
+    public void put(K key, V value){ linkedHashMap.put(key,value);}
+    public V getKey(K key){ return linkedHashMap.get(key);}
+    public boolean containsKey(K key){ return linkedHashMap.containsKey(key);}
+    public int size(){ return linkedHashMap.size();}
+    public void clear(){ linkedHashMap.clear();}
+
     public void put(K key, V value){
         linkedHashMap.put(key,value);
     }
@@ -1223,7 +1282,7 @@ class Test {
 }
 ```
 
-<details>
+<details open>
     <summary>result</summary>
     <br>
     <img src="img_16.png"/>  
@@ -1237,6 +1296,7 @@ class Test {
 
 * Фабричные методы: static <T> Result<T> success(T value) и static <T> Result<T> failure(Exception error).
 
+```
 * isSuccess(), getValue(), getError().
 
 * getOrDefault(T defaultValue) — возвращает значение при успехе, иначе defaultValue.
@@ -1244,6 +1304,7 @@ class Test {
 * <R> Result<R> map(Function<T, R> mapper) — трансформирует значение при успехе; при неуспехе возвращает Result.failure с той же ошибкой.
 
 * toString().
+```
 
 Реализуйте static Result<Integer> divide(int a, int b), продемонстрируйте divide(10,2) и divide(10,0), getOrDefault, цепочку map.
 
@@ -1265,6 +1326,23 @@ public class Result<T> {
         this.value=null;
         this.error=error;
     }
+    public static <T> Result<T> success(T value){ // фабричный метод для успешного результата
+        return new Result<>(value);
+    }
+    public static <T> Result<T> failure(Exception error){ // фабричный метод для ошибки
+        return new Result<>(error);
+    }
+    public boolean isSuccess(){ // проверка на успешность операции
+        return error == null;
+    }
+    public T getValue(){ // получение значения
+        return value;
+    }
+    public Exception getError(){ // получение ошибки
+        return error;
+    }
+    public T getOrDefault(T defaultValue){ // при успехе получаем значение, при ... дефолтное
+
     public static <T> Result<T> success(T value){
         return new Result<>(value);
     }
@@ -1281,6 +1359,7 @@ public class Result<T> {
         return error;
     }
     public T getOrDefault(T defaultValue){ 
+
         return isSuccess() ? value:defaultValue;
     }
     public <R> Result<R> map(Function<T, R> mapper){
@@ -1331,16 +1410,126 @@ class Test {
         System.out.println("Итог цепочки map для успеха: " + chainSuccess);
 
         System.out.println("\n4. Проверка цепочки map (Ошибка)");
+
+        Result<Integer> chainFailure = divide(10, 0).map(res -> "Результат: " + res).map(String::length);
+
         Result<Integer> chainFailure = divide(10, 0)
                 .map(res -> "Результат: " + res)
                 .map(String::length);
+
         System.out.println("Итог цепочки map для ошибки: " + chainFailure);
     }
 }
 ```
 
-<details>
+<details open>
     <summary>result</summary>
     <br>
     <img src="img_17.png"/>  
 </details>
+
+<br>
+<br>
+
+---
+
+### <a id="title14">Контрольные вопросы</a>
+
+1. В чём разница между нестатическим внутренним классом и статическим вложенным классом?
+
+* Нестатический имеет доступ ко всем полям внешнего класса, статический только к статическим.
+
+2. Почему для создания экземпляра нестатического внутреннего класса снаружи нужен экземпляр внешнего класса?
+
+* Нестатический внутренний класс неявно хранит ссылку на экземпляр внешнего класса, который его создал.
+
+* Дает прямой доступ к приватным полям и методам этого экземпляра (без родителя не может существовать).
+
+3. Что такое стирание типов (type erasure)? Приведите пример того, что нельзя сделать из-за этого.
+
+* Параметры типа существуют только во время компиляции. В байт-коде заменяются на Object (в случае <T>), а если extends по какому-то классу, например, Number, то и замена на него.
+
+Что нельзя делать:
+
+```
+public class Container<T>{
+T obj = new T();// НЕЛЬЗЯ создать экземпляр T
+T[] array = new T[10];// НЕЛЬЗЯ создавать массивы типа Т
+if (obj instanceof T){}// НЕЛЬЗЯ использовать instance с T
+Class<T> c = T.class// НЕЛЬЗЯ полуить класс Т
+}
+```
+
+Что можно делать:
+
+```
+public class Container<T>{
+    T value; // МОЖНО объявлять переменные типа Т
+    List<T> list = new ArrayList<>(); // МОЖНО создавать коллекции
+}
+```
+
+Демонстрация стирания типов во время исполнения:
+
+```
+class TypeErasureDemo<T> {
+    public void check(Object obj) {
+        // if (obj instanceof T) {} — Ошибка: нельзя использовать instanceof с параметром типа
+        System.out.println("Тип T стёрт до Object на этапе исполнения");
+    }
+}
+
+// Использование:
+TypeErasureDemo<String> ted = new TypeErasureDemo<>();
+ted.check("Test");
+
+```
+
+4. Объясните принцип PECS. Когда использовать ? extends T и когда ? super T?
+
+* PECS = wildcard, когда не знаем какого типа передаём структуры данных в дженериках. Такое правило, чтобы не возникало ошибок.
+
+* extends T = для чтения.
+
+* super T = для записи.
+
+Копирование коллекции:
+
+```
+public static <T> void copy(List<? super T> dest, List<? extends T> src) {
+    for (T item : src) {   // src — producer, читаем из него
+        dest.add(item);    // dest — consumer, пишем в него
+    }
+}
+```
+
+5. Чем отличается throws от throw?
+
+* throw = выбрасывает исключение. throws = обрабатывает случай, когда исключение может появиться (checked).
+
+6. В каких случаях нужно создавать собственные checked исключения, а в каких — unchecked?
+
+* Классического использования исключений мало. Иногда для конкретной бизнес-задачи, нужно создавать свои исключения.
+
+7. Что произойдёт, если исключение возникнет внутри блока finally?
+
+* Полное перекрытие предыдущего исключение, которое могло возникнуть в блоках.
+
+8. Какой интерфейс должен реализовывать класс для использования в try-with-resources?
+
+* Класс ресурса должен реализовывать интерфейс AutoCloseable (наследник Closeable).
+
+9. Для чего используется цепочка исключений (exception chaining)?
+
+* Польза в сохранении оригинальное исключение при выбрасывании нового.
+
+* Не терять информацию о первой ошибки/причина возникновения при перемещении между уровнями кода.
+
+10. Можно ли создать массив обобщённого типа (new T[10])? Объясните почему.
+
+* Нет, из-за механизма стирания типов (Type Erasure) в Java.
+
+* При работе программы информация о типе T исчезает. JVM не знает: массив - тип - размер в байтах, который нужно выделить в памяти.
+
+* Массивы в Java должны жестко знать свой тип во время выполнения, а дженерики существуют только на этапе компиляции.
+
