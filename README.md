@@ -8,4 +8,6 @@
 
 * ### [Практическое занятие 4: Вложенные классы, Обобщения и Исключения](https://github.com/winnca/missa/tree/practice_4)
 
+* ### [Практическое занятие 5: Коллекции, Потоки ввода/вывода и Многопоточность](https://github.com/winnca/missa/tree/practice_5)
+
 * ### [Практическое занятие 6: Системы сборки, JDBC и Hibernate](https://github.com/winnca/missa/tree/practice_6)
