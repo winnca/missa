@@ -299,7 +299,7 @@ public class FieldInjectionDemo {
 ```
 
 <details>
-    <summary>2.1</summary>
+    <summary>2.2</summary>
     <br>
     <img src="img_8.png"/>
 </details>
