@@ -1,3 +1,75 @@
+### [Тест]
+
+<details>
+    <summary>test</summary>
+    <br>
+    <img src="img_61.png"/>
+    <br>
+    <img src="img_29.png"/>
+    <br>
+    <img src="img_30.png"/>
+    <br>
+    <img src="img_31.png"/>
+    <br>
+    <img src="img_32.png"/>
+    <br>
+    <img src="img_33.png"/>
+    <br>
+    <img src="img_34.png"/>
+    <br>
+    <img src="img_35.png"/>
+    <br>
+    <img src="img_36.png"/>
+    <br>
+    <img src="img_37.png"/>
+    <br>
+    <img src="img_38.png"/>
+    <br>
+    <img src="img_39.png"/>
+    <br>
+    <img src="img_40.png"/>
+    <br>
+    <img src="img_41.png"/>
+    <br>
+    <img src="img_42.png"/>
+    <br>
+    <img src="img_43.png"/>
+    <br>
+    <img src="img_44.png"/>
+    <br>
+    <img src="img_45.png"/>
+    <br>
+    <img src="img_46.png"/>
+    <br>
+    <img src="img_47.png"/>
+    <br>
+    <img src="img_48.png"/>
+    <br>
+    <img src="img_49.png"/>
+    <br>
+    <img src="img_50.png"/>
+    <br>
+    <img src="img_51.png"/>
+    <br>
+    <img src="img_52.png"/>
+    <br>
+    <img src="img_53.png"/>
+    <br>
+    <img src="img_54.png"/>
+    <br>
+    <img src="img_55.png"/>
+    <br>
+    <img src="img_56.png"/>
+    <br>
+    <img src="img_57.png"/>
+    <br>
+    <img src="img_58.png"/>
+    <br>
+    <img src="img_59.png"/>
+    <br>
+    <img src="img_60.png"/>
+</details>
+
 ### Задание 1.1
 
 <details>
