@@ -11,3 +11,5 @@
 * ### [Практическое занятие 5: Коллекции, Потоки ввода/вывода и Многопоточность](https://github.com/winnca/missa/tree/practice_5)
 
 * ### [Практическое занятие 6: Системы сборки, JDBC и Hibernate](https://github.com/winnca/missa/tree/practice_6)
+
+* ### [Практическое занятие 7: Spring Framework и Spring Boot](https://github.com/winnca/missa/tree/practice_7)
