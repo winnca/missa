@@ -700,6 +700,8 @@ public class DAOTest {
 
 ### Задание 3.1
 
+Добавьте в pom.xml зависимости и создайте src/main/resources/hibernate.cfg.xml:
+
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -747,6 +749,8 @@ public class DAOTest {
 <br>
 
 ### Задание 3.2
+
+Изучите Entity-класс Movie. Объясните назначение аннотаций: @Entity, @Table, @Id, @GeneratedValue, @Column. Что произойдёт если убрать @Column(nullable = false) — на уровне кода или базы данных?
 
 `@Entity`:
 
@@ -876,7 +880,7 @@ public class Movie {
 ```
 
 <details>
-    <summary>3.1</summary>
+    <summary>3.2</summary>
     <br>
     <img src="img_18.png"/>
 </details>
@@ -891,12 +895,24 @@ public class Movie {
 
 (1) чем HQL отличается от SQL? 
 
-(2) когда предпочтительнее Criteria API вместо HQL? 
+* HQL оперирует именами Java-классов (сущностей) и их свойствами.
+
+* SQL работает напрямую с таблицами и колонками в базе данных.
+
+* HQL автоматически переводится Hibernate в SQL с учетом синтаксиса конкретной СУБД.
+
+(2) когда предпочтительнее Criteria API вместо HQL?
+
+* Criteria API предпочтительнее, когда нужно строить динамические запросы в зависимости от множества условий (например, сложные фильтры в поиске). 
+
+* Собирает запрос через Java-код, что исключает опечатки в строках и проверяется на этапе компиляции (Type-safety).
 
 (3) что такое сессия (Session) в Hibernate?
 
+* Сессия (Session) — кратковременный интерфейс взаимодействия между Java-приложением и базой данных = обертку над JDBC-соединением, управляет транзакциями и кэшем первого уровня (Identity Map) для отслеживания состояний сущностей.
+
 <details>
-    <summary>3.1</summary>
+    <summary>3.3</summary>
     <br>
     <img src="img_19.png"/>
     <br>
@@ -910,3 +926,450 @@ public class Movie {
     <br>
     <img src="img_24.png"/>
 </details>
+
+<br>
+
+### Задание 4.1
+
+Реализуйте перевод средств между банковскими счетами с управлением транзакциями JDBC:
+
+* Создайте таблицу accounts (id INT PRIMARY KEY, owner VARCHAR(100), balance DECIMAL(10,2)).
+
+* Добавьте несколько счетов через INSERT.
+
+* Реализуйте метод transfer(Connection conn, int fromId, int toId, double amount):
+
+* Установите conn.setAutoCommit(false).
+
+* Проверьте, что на счёте fromId достаточно средств.
+
+* Если средств хватает: спишите с fromId, зачислите на toId, вызовите conn.commit().
+
+* Если средств не хватает или произошла ошибка: вызовите conn.rollback().
+
+* В блоке finally верните conn.setAutoCommit(true).
+
+Протестируйте: корректный перевод и иначе.
+
+```
+package com.movies.task_4_1;
+
+import jakarta.persistence.*;
+import java.math.BigDecimal;
+
+@Entity
+@Table(name = "accounts")
+public class Account {
+
+    @Id
+    private int id;
+
+    @Column(nullable = false, length = 100)
+    private String owner;
+
+    // Рекомендуется использовать BigDecimal для денежных операций
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal balance;
+
+    public Account() {}
+
+    public Account(int id, String owner, BigDecimal balance) {
+        this.id = id;
+        this.owner = owner;
+        this.balance = balance;
+    }
+
+    public int getId() { return id; }
+    public String getOwner() { return owner; }
+    public BigDecimal getBalance() { return balance; }
+
+    public void setBalance(BigDecimal balance) { this.balance = balance; }
+
+    @Override
+    public String toString() {
+        return String.format("ID: %d | Владелец: %s | Баланс: %s", id, owner, balance);
+    }
+}
+```
+
+```
+package com.movies.task_4_1;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import java.math.BigDecimal;
+
+public class DAOTest {
+    private static SessionFactory sessionFactory;
+    
+    public static void main(String[] args) {
+        Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
+        cfg.addAnnotatedClass(Account.class);
+        sessionFactory = cfg.buildSessionFactory();
+        
+        initData();
+
+        System.out.println("--- Исходное состояние ---");
+        printBalances();
+        
+        System.out.println("\n--- Тест 1: Перевод 100.00 от Стефан к Бонни ---");
+        transfer(1, 2, new BigDecimal("300.00"));
+        printBalances();
+        
+        System.out.println("\n--- Тест 2: Перевод 900.00 от от Стефан к Бонни (баланс всего 700) ---");
+        transfer(1, 2, new BigDecimal("800.00"));
+        printBalances();
+        
+        sessionFactory.close();
+    }
+    public static void transfer(int fromId, int toId, BigDecimal amount) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            
+            Account fromAccount = session.get(Account.class, fromId);
+            Account toAccount = session.get(Account.class, toId);
+
+            if (fromAccount == null || toAccount == null) {
+                throw new IllegalArgumentException("Один из счетов не найден в базе данных!");
+            }
+            if (fromAccount.getBalance().compareTo(amount) < 0) {
+                throw new IllegalStateException("Пополни счёт" + fromId);
+            }
+            
+            fromAccount.setBalance(fromAccount.getBalance().subtract(amount));
+            toAccount.setBalance(toAccount.getBalance().add(amount));
+            
+            session.merge(fromAccount);
+            session.merge(toAccount);
+
+            tx.commit();
+            System.out.println("Транзакция успешно завершена.");
+
+        } catch (Exception e) {
+            System.err.println("Ошибка транзакции: " + e.getMessage() + ". Выполнен Rollback.");
+            if (tx != null && tx.isActive()) {
+                tx.rollback();
+            }
+        } finally {
+            session.close();
+        }
+    }
+    private static void initData() {
+        try (Session session = sessionFactory.openSession()) {
+            Transaction tx = session.beginTransaction();
+            session.persist(new Account(1, "Стефан", new BigDecimal("700.00")));
+            session.persist(new Account(2, "Бонни", new BigDecimal("500.00")));
+            tx.commit();
+        }
+    }
+    private static void printBalances() {
+        try (Session session = sessionFactory.openSession()) {
+            session.createQuery("from Account", Account.class).getResultList().forEach(System.out::println);
+        }
+    }
+}
+```
+
+<details>
+    <summary>4.1</summary>
+    <br>
+    <img src="img_25.png"/>
+    <br>
+    <img src="img_26.png"/>
+</details>
+
+<br>
+
+### Задание 4.2
+
+Реализуйте метод поиска с пагинацией: findPage(SessionFactory sf, int pageNumber, int pageSize), pageNumber начинается с 1. Выведите страницу 1 (3 фильма), страницу 2 (3 фильма)
+
+```
+package com.movies.task_4_2;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "movies")
+public class Movie {
+    @Id
+    private int id;
+    @Column(nullable = false, length = 150)
+    private String title;
+    public Movie() {}
+    public Movie(int id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+    public int getId() {return id;}
+    public void setId(int id) {this.id = id;}
+    public String getTitle() {return title;}
+    public void setTitle(String title) {this.title = title;}
+    @Override
+    public String toString() {return String.format("ID: %2d | Название: %s", id, title);}
+}
+```
+
+```
+package com.movies.task_4_2;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import java.util.List;
+
+public class MovieTest {
+
+    public static void main(String[] args) {
+        Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
+        cfg.addAnnotatedClass(Movie.class);
+
+        try (SessionFactory sf = cfg.buildSessionFactory()) {
+
+            initMoviesData(sf);
+
+            System.out.println("Страница 1 = размер 3");
+            List<Movie> page1 = findPage(sf, 1, 3);
+            page1.forEach(System.out::println);
+
+            System.out.println("\nСтраница 2 = размер 3");
+            List<Movie> page2 = findPage(sf, 2, 3);
+            page2.forEach(System.out::println);
+        }
+    }
+    static List<Movie> findPage(SessionFactory sf, int pageNumber, int pageSize) {
+        try (Session session = sf.openSession()) {
+            return session.createQuery("FROM Movie ORDER BY id", Movie.class)
+                    .setFirstResult((pageNumber - 1) * pageSize)
+                    .setMaxResults(pageSize)
+                    .list();
+        }
+    }
+    private static void initMoviesData(SessionFactory sf) {
+        try (Session session = sf.openSession()) {
+            Transaction tx = session.beginTransaction();
+            for (int i = 1; i <= 7; i++) {
+                session.persist(new Movie(i, "Фильм №" + i));
+            }
+            tx.commit();
+        }
+    }
+}
+```
+
+<details>
+    <summary>4.2</summary>
+    <br>
+    <img src="img_27.png"/>
+</details>
+
+<br>
+
+### Задание 4.3
+
+Изучите и запустите агрегационные HQL-запросы. Объясните: 
+
+(1) что возвращает createQuery с SELECT genre, COUNT(*)?
+
+(2) чем uniqueResult() отличается от .list()?
+
+1) createQuery с SELECT genre, COUNT(*) возвращает список массивов объектов — List<Object[]>. 
+
+  * Каждый массив Object[] представляет строку результата: на индексе 0 лежит строка (String жанра), на индексе 1 лежит число (Long количества).
+
+2) Метод .list() возвращает коллекцию (даже пустую), если строк может быть много. 
+
+  * Метод uniqueResult() возвращает один конкретный объект или null, если данных нет. Если строк вернется больше одной, он выбросит исключение NonUniqueResultException.
+
+```
+package com.movies.task_4_3;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "movies")
+public class Movie {
+    @Id
+    private int id;
+    private String title;
+    private String genre;
+    @Column(name = "release_year")
+    private int year;
+
+    public Movie() {}
+
+    public Movie(int id, String title, String genre, int year) {
+        this.id = id;
+        this.title = title;
+        this.genre = genre;
+        this.year = year;
+    }
+
+    public int getId() { return id; }
+    public String getTitle() { return title; }
+    public String getGenre() { return genre; }
+    public int getYear() { return year; }
+}
+
+```
+
+```
+package com.movies.task_4_3;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
+import java.util.List;
+
+public class DAOTest {
+
+    public static void main(String[] args) {
+        Configuration cfg = new Configuration().configure("hibernate.cfg.xml");
+        cfg.addAnnotatedClass(Movie.class);
+
+        try (SessionFactory sf = cfg.buildSessionFactory()) {
+            initData(sf);
+            runAggregationQueries(sf);
+        }
+    }
+
+    static void runAggregationQueries(SessionFactory sf) {
+        try (Session session = sf.openSession()) {
+            System.out.println("Количество фильмов по жанрам");
+            List<Object[]> byGenre = session.createQuery("SELECT genre, COUNT(*) FROM Movie GROUP BY genre", Object[].class).list();
+            byGenre.forEach(row -> System.out.println(row[0] + ": " + row[1]));
+
+            System.out.println("\nСредний год выхода");
+            Double avgYear = session.createQuery("SELECT AVG(year) FROM Movie", Double.class).uniqueResult();
+            System.out.printf("Средний год: %.1f%n", avgYear);
+
+            System.out.println("\nНовейший фильм каждого жанра");
+            List<Object[]> newestByGenre = session.createQuery("SELECT genre, MAX(year) FROM Movie GROUP BY genre", Object[].class).list();
+            newestByGenre.forEach(row -> System.out.println(row[0] + ": " + row[1]));
+        }
+    }
+    private static void initData(SessionFactory sf) {
+        try (Session session = sf.openSession()) {
+            Transaction tx = session.beginTransaction();
+            session.persist(new Movie(1, "Матрица", "Sci-Fi", 2000));
+            session.persist(new Movie(2, "Интерстеллар", "Sci-Fi", 2014));
+            session.persist(new Movie(3, "Знакомьтесь, Джо Блэк", "Drama", 1998));
+            session.persist(new Movie(4, "С любовью, Рози", "Drama", 2013));
+            session.persist(new Movie(5, "Полицейский с рублёвки", "Comedy", 2015));
+            tx.commit();
+        }
+    }
+}
+```
+
+<details>
+    <summary>4.3</summary>
+    <br>
+    <img src="img_28.png"/>
+</details>
+
+<br>
+
+### Контрольные вопросы
+
+1. Что такое GAV-координаты в Maven? Для чего они используются?
+   
+GAV — это уникальный идентификатор артефакта (библиотеки), состоящий из трех частей: 
+
+* GroupId (имя организации/пакета), 
+
+* ArtifactId (название проекта) и Version (версия). 
+
+* Используются Maven для однозначного поиска, скачивания и подключения нужной библиотеки из центрального репозитория (Maven Central).
+
+2. В чём разница между <scope>compile</scope> и <scope>test</scope>?
+   
+* `compile` — область видимости по умолчанию; зависимость доступна на всех этапах сборки (компиляция, тестирование, запуск) и упаковывается в итоговый JAR/WAR. 
+
+* `test` — зависимость доступна только во время компиляции и запуска тестов (например, JUnit); она не включается в финальную сборку.
+
+3. Что такое транзитивные зависимости? Может ли это стать проблемой?
+   
+* Зависимости ваших зависимостей (библиотеки, которые нужны подключаемой вами библиотеке). Они скачиваются автоматически. 
+
+* Проблема при конфликте версий (Jar Hell), когда две разные библиотеки требуют одну и ту же транзитивную библиотеку, но разных, несовместимых между собой версий.
+
+4. Чем Gradle отличается от Maven? Назовите 2-3 преимущества каждого.
+   
+* Maven использует жесткую XML-структуру и фиксированный жизненный цикл сборки. Gradle использует скрипты на Groovy/Kotlin и подход на основе кастомных задач (Task).
+   
+* Преимущества Maven: строгий стандарт (понятен без изучения кода сборки), высокая стабильность, огромная экосистема плагинов.
+   
+* Преимущества Gradle: высокая скорость работы за счет инкрементальной сборки и демона, гибкость настройки логики, лаконичный код сборки без XML.
+
+5. Что такое JDBC Driver? Почему для разных СУБД нужны разные драйверы?
+
+* JDBC Driver — это программный адаптер (библиотека), который транслирует стандартные вызовы Java API в специфический сетевой протокол конкретной базы данных. 
+
+* Разные драйверы нужны потому, что PostgreSQL, MySQL, Oracle и H2 используют абсолютно разные внутренние протоколы обмена данными и структуры команд.
+
+6. Чем PreparedStatement отличается от Statement? Зачем нужен PreparedStatement?
+   
+* `Statement` отправляет запрос в БД в виде чистой строки каждый раз заново. 
+
+* `PreparedStatement` предварительно компилирует шаблон запроса в БД, а параметры подставляет отдельно. Для высокой производительности (при частых повторах одного запроса) и для автоматического экранирования параметров (защита от SQL-инъекций).
+
+7. Что такое SQL Injection? Как PreparedStatement защищает от неё?
+
+* SQL-инъекция — это уязвимость, при которой злоумышленник внедряет вредоносный SQL-код через текстовые поля ввода, ломая логику запроса (например, обход авторизации). 
+
+* `PreparedStatement` защищает от нее, так как база данных воспринимает параметры строго как литералы (данные), а не как исполняемый SQL-код, полностью экранируя любые кавычки и спецсимволы.
+
+8. Что такое транзакция? Что означают свойства ACID?
+
+Транзакция — это группа последовательных операций с базой данных, которая выполняется как единое целое (либо всё, либо ничего). Свойства ACID гарантируют надежность:
+
+* Atomicity (Атомарность): транзакция фиксируется полностью (`commit`) или полностью откатывается (`rollback`).
+
+* Consistency (Согласованность): транзакция переводит базу из одного валидного состояния в другое.
+
+* Isolation (Изолированность): параллельные транзакции не должны влиять на результат друг друга.
+
+* Durability (Стойкость): если транзакция закоммичена, ее изменения не пропадут даже при сбое питания БД.
+
+9. Что такое ORM? Какие преимущества и недостатки по сравнению с чистым JDBC?
+   
+* ORM (Object-Relational Mapping) — технология, связывающая таблицы БД с Java-классами.
+
+* +: избавляет от написания ручного SQL, автоматически переносит данные в объекты, снижает объем шаблонного кода.
+
+* -: создает избыточную нагрузку на память и процессор, генерирует неоптимальный SQL для сложных аналитических запросов, требует долгого изучения.
+
+10. Что такое @Entity и @Table в Hibernate? Что происходит если они отсутствуют?
+    
+* `@Entity` указывает Hibernate, что данный Java-класс является сущностью, отображаемой в БД. 
+
+* `@Table` задает конкретное имя таблицы для маппинга. 
+
+* Если отсутствует `@Entity`, Hibernate проигнорирует класс и вызовет ошибку при попытке работы с ним. 
+
+* Если отсутствует `@Table`, Hibernate будет искать или создавать таблицу, имя которой полностью совпадает с именем самого Java-класса.
+
+11. Чем HQL отличается от SQL? Чем HQL отличается от Criteria API?
+    
+* HQL отличается от SQL тем, что работает с классами и их полями, а не с таблицами и колонками. 
+
+* HQL отличается от Criteria API формой написания: HQL пишется в виде строк (легко допустить опечатку), а Criteria API строится динамически с помощью объектного кода Java, что гарантирует проверку типов и синтаксиса на этапе компиляции.
+
+12. Что означает hbm2ddl.auto = create в конфигурации Hibernate?
+    
+* Настройка указывает Hibernate при каждом запуске приложения (создании `SessionFactory`) принудительно удалять существующие таблицы, схемы которых совпадают с текущими `@Entity`, и создавать их заново с нуля.
+
+* Все старые данные при этом полностью стираются.
