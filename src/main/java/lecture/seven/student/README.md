@@ -1,6 +1,6 @@
 ### Тест
 
-<details>
+<details open>
     <summary>test</summary>
     <br>
     <img src="img_96.png"/>
@@ -80,7 +80,7 @@
 
 ### Задание 1.1
 
-<details>
+<details open>
     <summary>1.1</summary>
     <br>
     <img src="img.png"/>
@@ -259,7 +259,7 @@ public interface GreetingService {
 }
 ```
 
-<details>
+<details open>
     <summary>2.1</summary>
     <br>
     <img src="img_7.png"/>
@@ -351,7 +351,7 @@ public class FieldInjectionDemo {
 }
 ```
 
-<details>
+<details open>
     <summary>2.1</summary>
     <br>
     <img src="img_8.png"/>
@@ -361,7 +361,7 @@ public class FieldInjectionDemo {
 
 ## Задание 3
 
-<details>
+<details open>
     <summary>3</summary>
     <br>
     <img src="img_9.png"/>
@@ -543,7 +543,7 @@ public class StudentRestController {
 
 Перед началом закомментируем зависимость Spring Security, чтобы не мешала.
 
-<details>
+<details open>
     <summary>3 test</summary>
     <br>
     <img src="img_10.png"/>
@@ -561,7 +561,7 @@ public class StudentRestController {
 
 ## Задание 4
 
-<details>
+<details open>
     <summary>4</summary>
     <br>
     <img src="img_15.png"/>
@@ -693,7 +693,7 @@ src/main/resources/templates/students.html:
 
 * Предотвращает повторную отправку формы и дублирование данных в базе при обновлении страницы.
 
-<details>
+<details open>
     <summary>4 test</summary>
     <br>
     <img src="img_17.png"/>
@@ -763,7 +763,7 @@ public class SecurityConfig {
 }
 ```
 
-<details>
+<details open>
     <summary>5.1</summary>
     <br>
     <img src="img_20.png"/>
@@ -789,7 +789,7 @@ public class SecurityConfig {
 @EnableMethodSecurity   // на уровне класса
 ```
 
-<details>
+<details open>
     <summary>5.2</summary>
     <br>
     <img src="img_28.png"/>
@@ -807,7 +807,7 @@ public List<Student> getAll() { ... }
 public ResponseEntity<Void> delete(@PathVariable Long id) { ... }
 ```
 
-<details>
+<details open>
     <summary>5.2</summary>
     <br>
     <img src="img_29.png"/>
@@ -991,7 +991,7 @@ public class StudentServiceImpl implements StudentService {
 }
 ```
 
-<details>
+<details open>
     <summary>6.1</summary>
     <br>
     <img src="img_32.png"/>
@@ -1036,7 +1036,7 @@ public class LoggingAspect {
 }
 ```
 
-<details>
+<details open>
     <summary>6.2</summary>
     <br>
     <img src="img_35.png"/>
@@ -1074,7 +1074,7 @@ public class AppInitializer {
 }
 ```
 
-<details>
+<details open>
     <summary>6.3</summary>
     <br>
     <img src="img_36.png"/>
@@ -1136,7 +1136,7 @@ class StudentRestControllerTest {
 }
 ```
 
-<details>
+<details open>
     <summary>6.4</summary>
     <br>
     <img src="img_37.png"/>
@@ -1310,7 +1310,7 @@ public class StudentServiceImpl implements StudentService {
 
 Проверьте через curl. Должно вернуть HTTP 400 (а после задания 7.3 — структурированную ошибку). POST /api/students. {"name":"","surname":"A"}
 
-<details>
+<details open>
     <summary>7.1</summary>
     <br>
     <img src="img_42.png"/>
@@ -1438,7 +1438,7 @@ public class StudentRestController {
 
 Запустите приложение, выполните CRUD-запросы и убедитесь, что в JSON-ответах нет полей entity, которых нет в StudentResponse.
 
-<details>
+<details open>
     <summary>7.2</summary>
     <br>
     <img src="img_43.png"/>
@@ -1548,7 +1548,7 @@ public class GlobalExceptionHandler {
 
 Перезапустите приложение и снова попробуйте невалидный POST: /api/students {"name":"","surname":"A"}.
 
-<details>
+<details open>
     <summary>7.3</summary>
     <br>
     <img src="img_49.png"/>
@@ -1565,7 +1565,7 @@ public Student findById(Long id) {
 }
 ```
 
-<details>
+<details open>
     <summary>7.3</summary>
     <br>
     <img src="img_51.png"/>
@@ -1684,7 +1684,7 @@ public class StudentServiceImpl implements StudentService {
 
 Вызовите saveTwoOneBroken через временный REST-эндпоинт или CommandLineRunner, передав bad с пустым именем. Проверьте через H2-консоль или GET /api/students: первый студент должен не сохраниться благодаря откату транзакции.
 
-<details>
+<details open>
     <summary>7.4</summary>
     <br>
     <img src="img_52.png"/>
@@ -1726,7 +1726,7 @@ public class TxPitfallService {
 }
 ```
 
-<details>
+<details open>
     <summary>7.4</summary>
     <br>
     <img src="img_58.png"/>
