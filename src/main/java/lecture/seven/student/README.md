@@ -80,26 +80,26 @@
 
 ### Задание 1.1
 
-Задание 1.1: Spring Initializr
 Откройте https://start.spring.io и сгенерируйте проект со следующими параметрами:
 
-Project: Maven
-Language: Java
-Spring Boot: 3.5.x
-Group: mpt.it
-Artifact: student
-Name: student
-Package name: lecture.seven.student
-Packaging: Jar
-Java: 21 (или 24, если установлена)
-Зависимости (Dependencies):
+* Project: Maven
+* Language: Java
+* Spring Boot: 3.5.x
+* Group: mpt.it
+* Artifact: student
+* Name: student
+* Package name: lecture.seven.student
+* Packaging: Jar
+* Java: 21 (или 24, если установлена)
+* Зависимости (Dependencies):
 
-Spring Web
-Spring Data JPA
-Spring Security
-Thymeleaf
-H2 Database
-Spring Boot DevTools
+* Spring Web
+* Spring Data JPA
+* Spring Security
+* Thymeleaf
+* H2 Database
+* Spring Boot DevTools
+
 Скачайте архив, распакуйте его. Откройте проект в IDE и убедитесь, что он собирается:
 
 ```
