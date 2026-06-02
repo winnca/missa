@@ -1,6 +1,6 @@
 ### Задание 1.1
 
-<details>
+<details open>
     <summary>1.1</summary>
     <br>
     <img src="img.png"/>
@@ -78,7 +78,7 @@
 
     - com.sun.istack:istack-commons-runtime:4.1.1 (через jaxb-core)
 
-<details>
+<details open>
     <summary>1.2</summary>
     <br>
     <img src="img_11.png"/>
@@ -260,7 +260,7 @@ public class MovieJDBC {
 
 * Защищён от SQL-инъекций (в отличик от Statement), компилируется 1 раз (компилируется при каждом вызове), используется парамеры и сеттеры (в Statement конкатенация строкс ручным форматированием).
 
-<details>
+<details open>
     <summary>2.1</summary>
     <br>
     <img src="img_12.png"/>
@@ -681,7 +681,7 @@ public class DAOTest {
 }
 ```
 
-<details>
+<details open>
     <summary>2.2</summary>
     <br>
     <img src="img_14.png"/>
@@ -875,8 +875,8 @@ public class Movie {
 }
 ```
 
-<details>
-    <summary>3.2</summary>
+<details open>
+    <summary>3.1.2</summary>
     <br>
     <img src="img_18.png"/>
 </details>
@@ -895,7 +895,7 @@ public class Movie {
 
 (3) что такое сессия (Session) в Hibernate?
 
-<details>
+<details open>
     <summary>3.3</summary>
     <br>
     <img src="img_19.png"/>
