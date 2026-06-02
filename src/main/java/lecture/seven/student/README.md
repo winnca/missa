@@ -3,6 +3,8 @@
 <details>
     <summary>test</summary>
     <br>
+    <img src="img_96.png"/>
+    <br>
     <img src="img_60.png"/>
     <br>
     <img src="img_61.png"/>
@@ -74,8 +76,6 @@
     <img src="img_94.png"/>
     <br>
     <img src="img_95.png"/>
-    <br>
-    <img src="img_96.png"/>
 </details>
 
 ### Задание 1.1
