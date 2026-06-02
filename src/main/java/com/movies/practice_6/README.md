@@ -72,6 +72,35 @@
 
 ### Задание 1.1
 
+Создайте структуру Maven-проекта вручную (без IDE):
+
+```
+movie-app/
+├── pom.xml
+└── src/
+    └── main/
+        └── java/
+            └── com/
+                └── movies/
+                    └── Main.java
+```
+
+Создайте pom.xml со следующими зависимостями:
+
+* H2 Database (версия 2.2.224)
+* Добавьте свойство maven.compiler.source = 21
+
+Создайте класс Main.java с методом main, который выводит "Movie App Started".
+
+Выполните команды и запишите вывод:
+
+```
+mvn compile          # Должен скомпилировать класс
+mvn package          # Должен создать JAR в target/
+mvn clean            # Удалит target/
+mvn dependency:list  # Покажет все зависимости
+```
+
 <details open>
     <summary>1.1</summary>
     <br>
@@ -101,6 +130,25 @@
 <br>
 
 ### Задание 1.2
+
+Для проекта с pom.xml:
+
+```
+<dependencies>
+    <dependency>
+        <groupId>org.hibernate.orm</groupId>
+        <artifactId>hibernate-core</artifactId>
+        <version>6.4.0.Final</version>
+    </dependency>
+    <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <version>2.2.224</version>
+    </dependency>
+</dependencies>
+```
+
+Выполните mvn dependency:tree и ответьте:
 
 1. Сколько прямых зависимостей?
 
@@ -160,6 +208,8 @@
 <br>
 
 ### Задание 2.1
+
+Изучите и запустите программу MovieJDBC. Убедитесь, что все операции (создание, вставка, обновление, удаление, поиск) работают корректно. Объясните: (1) почему в findByTitle используется LIKE с %? (2) что такое PreparedStatement и чем он безопаснее Statement?
 
 ```
 package com.movies;
@@ -816,6 +866,28 @@ public class DAOTest {
         </plugins>
     </build>
 </project>
+```
+
+Создайте src/main/resources/hibernate.cfg.xml:
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">org.h2.Driver</property>
+        <property name="hibernate.connection.url">jdbc:h2:mem:moviedb;DB_CLOSE_DELAY=-1</property>
+        <property name="hibernate.connection.username">sa</property>
+        <property name="hibernate.connection.password"></property>
+        <property name="hibernate.dialect">org.hibernate.dialect.H2Dialect</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">false</property>
+        <mapping class="com.movies.Movie"/>
+    </session-factory>
+</hibernate-configuration>
 ```
 
 <br>
