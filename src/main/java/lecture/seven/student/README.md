@@ -1,6 +1,6 @@
 ### Задание 1.1
 
-<details>
+<details open>
     <summary>1.1</summary>
     <br>
     <img src="img.png"/>
@@ -190,7 +190,7 @@ public interface GreetingService {
 }
 ```
 
-<details>
+<details open>
     <summary>2.1</summary>
     <br>
     <img src="img_7.png"/>
@@ -298,7 +298,7 @@ public class FieldInjectionDemo {
 }
 ```
 
-<details>
+<details open>
     <summary>2.2</summary>
     <br>
     <img src="img_8.png"/>
@@ -308,7 +308,7 @@ public class FieldInjectionDemo {
 
 ### Задание 3
 
-<details>
+<details open>
     <summary>3</summary>
     <br>
     <img src="img_9.png"/>
@@ -490,7 +490,7 @@ public class StudentRestController {
 
 Перед началом закомментируем зависимость Spring Security, чтобы не мешала.
 
-<details>
+<details open>
     <summary>test</summary>
     <br>
     <img src="img_10.png"/>
@@ -508,7 +508,7 @@ public class StudentRestController {
 
 ### Задание 4
 
-<details>
+<details open>
     <summary>test</summary>
     <br>
     <img src="img_15.png"/>
@@ -640,7 +640,7 @@ src/main/resources/templates/students.html:
 
 * Предотвращает повторную отправку формы и дублирование данных в базе при обновлении страницы.
 
-<details>
+<details open>
     <summary>test</summary>
     <br>
     <img src="img_17.png"/>
