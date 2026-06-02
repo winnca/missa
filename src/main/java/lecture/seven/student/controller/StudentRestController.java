@@ -20,7 +20,6 @@ public class StudentRestController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public List<Student> getAll() {
         return studentService.findAll();
     }
@@ -46,7 +45,6 @@ public class StudentRestController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         if (studentService.findById(id) == null) {
             return ResponseEntity.notFound().build();
